@@ -25,12 +25,12 @@
         <div class="login-body">
             <form id="singin">
                 <div class="input-form input">
-                    <label for="">User</label>
-                    <input type="text">
+                    <label for="txtUserName">User</label>
+                    <input type="text" name="txtUserName" id="txtUserName">
                 </div>
                 <div class="input-form input">
-                    <label for="">Password</label>
-                    <input type="password">
+                    <label for="txtPassword">Password</label>
+                    <input type="password" name="txtPassword" id="txtPassword">
                 </div>
                 <div class="input-form button">
                     <button type="submit">Sing In</button>
@@ -57,6 +57,11 @@
                     <button type="submit">Create</button>
                 </div>
             </form>
+            <div class="alert hidden">
+                <p class="title">title</p>
+                <p class="description">description</p>
+                <p class="datetime">day year month time</p>
+            </div>
         </div>
         <div class="login-footer">
             <a href="">Forgot Password?</a>

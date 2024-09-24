@@ -465,6 +465,36 @@ body {
     font-size: 1.2rem;
 }
 
+/*Style alerta*/
+.alert {
+    width: 100%;
+    padding: 0.2rem 1rem;
+    color: var(--color-white);
+}
+
+.alert>.title {
+    font-weight: bold;
+}
+
+.alert>.description {
+    margin-bottom: 0.3rem;
+}
+
+.alert>.datetime {
+    font-size: 0.5rem;
+    font-style: italic;
+}
+
+.success {
+    background: #0c940c;
+    border-radius: 0.2rem;
+}
+
+.danger {
+    background: #e22b2b;
+    border-radius: 0.2rem;
+}
+
 /*Moviles pequeños*/
 @media only screen and (max-width:480px) {
 
@@ -482,7 +512,7 @@ body {
         display: none !important;
     }
 
-  /*Estilos chat*/
+    /*Estilos chat*/
     /*
     chat-list
     */
@@ -596,7 +626,7 @@ body {
         display: none !important;
     }
 
-  /*Estilos chat*/
+    /*Estilos chat*/
     /*
     chat-list
     */
