@@ -3,6 +3,7 @@ class Users extends Controllers
 {
     public function __construct()
     {
+        session_start(["name" => NAME_SESION]);
         parent::__construct();
     }
 
@@ -101,6 +102,27 @@ class Users extends Controllers
         }
         $userPassword = md5($userPassword);
         $request = $this->model->select_user($userName, $userPassword);
-        echo json_encode($request);
+        if (!is_array($request)) {
+            $data = array(
+                "title" => "Ocurrio un error inesperado",
+                "description" => "Usuario o contraseña incorrectos/Usuario no creado",
+                "status" => false,
+                "datetime" => date("Y-m-d H:i:s"),
+            );
+            echo json_encode($data);
+            die();
+        }
+        if (count($request) > 0) {
+            $_SESSION["chat"]["infoUSer"] = $request;
+            $data = array(
+                "title" => "Correcto",
+                "description" => "Inicio de sesion para el usuario {$userName} completado",
+                "status" => true,
+                "datetime" => date("Y-m-d H:i:s"),
+                "url" => base_url() . "/chat",
+            );
+            echo json_encode($data);
+            die();
+        }
     }
 }

@@ -24,3 +24,5 @@ const NOMBRE_REMITENTE = "";
 const EMAIL_REMITENTE = "";
 const NOMBRE_EMPESA = "";
 const WEB_EMPRESA = "";
+//nombre sesion
+const NAME_SESION = "CHATPURPLE";
