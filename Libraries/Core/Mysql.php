@@ -17,9 +17,9 @@ class Mysql extends Conexion
 	{
 		try {
 			$this->strquery = $query;
-			$this->arrVAlues = $arrValues;
+			$this->arrValues = $arrValues;
 			$insert = $this->conexion->prepare($this->strquery);
-			$resInsert = $insert->execute($this->arrVAlues);
+			$resInsert = $insert->execute($this->arrValues);
 			if ($resInsert) {
 				$lastInsert = $this->conexion->lastInsertId();
 			} else {
@@ -38,13 +38,25 @@ class Mysql extends Conexion
 		}
 	}
 	//Busca un registro
-	public function select(string $query)
+	public function select(string $query, array $arrValues = array())
 	{
-		$this->strquery = $query;
-		$result = $this->conexion->prepare($this->strquery);
-		$result->execute();
-		$data = $result->fetch(PDO::FETCH_ASSOC);
-		return $data;
+		try {
+			$this->strquery = $query;
+			$this->arrValues = $arrValues;
+			$result = $this->conexion->prepare($this->strquery);
+			$result->execute($this->arrValues);
+			$data = $result->fetch(PDO::FETCH_ASSOC);
+			return $data;
+		} catch (PDOException $error) {
+			$data = array(
+				"title" => "Ocurrio un error inesperado",
+				"description" => $error->getMessage(),
+				"status" => false,
+				"datetime" => date("Y-m-d H:i:s"),
+			);
+			echo json_encode($data);
+			die();
+		}
 	}
 	//Devuelve todos los registros
 	public function select_all(string $query)

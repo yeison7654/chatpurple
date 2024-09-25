@@ -100,5 +100,7 @@ class Users extends Controllers
             die();
         }
         $userPassword = md5($userPassword);
+        $request = $this->model->select_user($userName, $userPassword);
+        echo json_encode($request);
     }
 }

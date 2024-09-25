@@ -21,7 +21,17 @@ class UsersModel extends Mysql
         $request = $this->insert($sql, $arrData);
         return $request;
     }
-    public function select_user($username, $password){
-        $sql = "SELECT*FROM users AS u WHERE u.username="" AND u.`password`=""";
+    public function select_user($username, $password)
+    {
+        $sql = "SELECT u.id,u.username,u.email FROM users AS u
+                WHERE (u.username=? AND u.`password`=?) OR (u.email=? AND u.`password`=?);";
+        $arrData = array(
+            $this->username = $username,
+            $this->password = $password,
+            $this->email = $username,
+            $this->password = $password,
+        );
+        $request = $this->select($sql, $arrData);
+        return $request;
     }
 }

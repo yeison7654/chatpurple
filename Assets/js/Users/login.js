@@ -64,6 +64,8 @@ function formSingIn() {
             fetch(url, config)
                 .then(response => response.json())
                 .then(data => {
+                    console.log(data)
+                    return true;
                     let alert = document.querySelector(".alert");
                     if (data.status) {
                         document.querySelector(".title").innerHTML = data.title;
