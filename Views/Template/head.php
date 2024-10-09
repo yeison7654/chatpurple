@@ -14,3 +14,6 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="<?= media() ?>/css/style.css">
 </head>
+<?php
+require_once "./Views/Template/load.php"
+?>
