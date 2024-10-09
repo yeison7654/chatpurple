@@ -1,22 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $data["page_title"] ?></title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?= media() ?>/css/style.css">
-</head>
-
-<body>
-    <div class="box-load">
-        <div class="spinner"></div>
-        <img src="https://i.pinimg.com/originals/c0/fe/0d/c0fe0d6fd224d57dc39206d0f780b4dd.gif" alt="">
-    </div>
+    <?= header_chat($data) ?>
     <div class="box-login">
         <div class="login-header">
             <a href="" class="btn-in sing  active">Sing In</a>
@@ -67,12 +49,4 @@
             <a href="">Forgot Password?</a>
         </div>
     </div>
-    <script>
-        const base_url = "<?= base_url() ?>";
-    </script>
-    <script src="<?= media() ?>/js/libraries/main.js"></script>
-    <script src="<?= media() ?>/js/libraries/login.js"></script>
-    <script src="<?= media() ?>/js/<?= $data["page_filejs"] ?>"></script>
-</body>
-
-</html>
+    <?= footer_chat($data) ?>

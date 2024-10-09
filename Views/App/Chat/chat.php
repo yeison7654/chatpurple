@@ -1,25 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App Chat</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./Assets/css/style.css">
-</head>
-
-<body>
-    <div class="box-load">
-        <div class="spinner"></div>
-        <img src="https://i.pinimg.com/originals/c0/fe/0d/c0fe0d6fd224d57dc39206d0f780b4dd.gif" alt="">
-    </div>
     <div class="box-chat">
         <section class="chat-list">
             <nav class="list-head">
@@ -251,9 +229,4 @@
                 </form>
             </footer>
         </section>
-    </div>
-    <script src="./Assets/js/main.js"></script>
-    <script src="./Assets/js/chat.js"></script>
-</body>
-
-</html>
+    </div>   
