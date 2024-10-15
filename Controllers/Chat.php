@@ -27,4 +27,57 @@ class Chat extends Controllers
         );
         $this->views->getView($this, "chat", $data);
     }
+    /**
+     * Funciones del chat
+     */
+    public function searchUsers()
+    {
+        //verificar si existe el metodo solicitado
+        if (!$_POST) {
+            $data = array(
+                "title" => "Ocurrio un error inesperado",
+                "description" => "Metodo del formulario no encontrado",
+                "status" => false,
+                "datetime" => date("Y-m-d H:i:s"),
+            );
+            echo json_encode($data);
+            die();
+        }
+        //recibir la informacion enviada
+        $userName = strClean($_POST["txtSearchUser"]);
+        //evaluamos que no envie campos vacios
+        if ($userName == "") {
+            $data = array(
+                "title" => "Ocurrio un error inesperado",
+                "description" => "No se permite el ingreso de campos vacios",
+                "status" => false,
+                "datetime" => date("Y-m-d H:i:s"),
+            );
+            echo json_encode($data);
+            die();
+        }
+        //consultamos en el modelo si existen en la bd la informacion
+        $request = $this->model->selectUserName($userName);
+        if (!is_array($request)) {
+            $data = array(
+                "title" => "Ocurrio un error inesperado",
+                "description" => "Usuario no encontrado",
+                "status" => false,
+                "datetime" => date("Y-m-d H:i:s"),
+            );
+            echo json_encode($data);
+            die();
+        }
+        if (count($request) > 0) {
+            $data = array(
+                "title" => "Correcto",
+                "description" => "Usuario econtrado",
+                "status" => true,
+                "datetime" => date("Y-m-d H:i:s"),
+                "url" => base_url() . "/chat",
+            );
+            echo json_encode($data);
+            die();
+        }
+    }
 }
