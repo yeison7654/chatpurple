@@ -43,6 +43,11 @@ body {
     display: none !important;
 }
 
+.text-center {
+    text-align: center !important;
+    padding: 1rem !important;
+}
+
 /*Estilos carga o load*/
 .box-load {
     position: fixed;

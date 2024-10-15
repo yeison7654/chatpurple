@@ -69,14 +69,7 @@ class Chat extends Controllers
             die();
         }
         if (count($request) > 0) {
-            $data = array(
-                "title" => "Correcto",
-                "description" => "Usuario econtrado",
-                "status" => true,
-                "datetime" => date("Y-m-d H:i:s"),
-                "url" => base_url() . "/chat",
-            );
-            echo json_encode($data);
+            echo json_encode(["status" => true, "info" => $request]);
             die();
         }
     }

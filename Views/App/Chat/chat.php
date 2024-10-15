@@ -17,18 +17,8 @@
                 </a>
             </div>
         </nav>
-        <div class="list-body">
-            <div class="user-chat">
-                <img src="./Assets/img/user.png" alt="">
-                <div class="user-body-list">
-                    <div class="user-head-list">
-                        <p class="title-user color-primary">Usuario en chat</p>
-                        <p class="date-user">17 Sept 09 am</p>
-                    </div>
-                    <p class="user-ultimate-msj">Lorem ipsum dolor sit amet.
-                    </p>
-                </div>
-            </div>
+        <div class="list-body" id="listUsersChat">
+
         </div>
         <footer class="list-foot">
             <form name="formSearchUser" id="formSearchUser" class="foot-form-search">
@@ -47,7 +37,7 @@
         <nav class="chat-head-message">
             <a href="http://" class="btn-back"><i class="fa-solid fa-arrow-left"></i></a>
             <div class="box-user-message">
-                <img src="./Assets/img/user.png" alt="">
+                <img src="<?= media() ?>/images/user.png" alt="">
                 <div class="user-mesage-titles">
                     <p class="user-message-title">Usuario en chat</p>
                     <p class="user-message-online"><i class="fa-solid fa-circle"></i> <span>Online</span></p>
