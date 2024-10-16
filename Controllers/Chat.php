@@ -73,4 +73,33 @@ class Chat extends Controllers
             die();
         }
     }
+    //funcion que verifica si tenemos un chat con el usuario o no esta va crear la conversacion
+    public function conversation()
+    {
+        //verificar si existe el metodo solicitado
+        if (!$_POST) {
+            $data = array(
+                "title" => "Ocurrio un error inesperado",
+                "description" => "Metodo del formulario no encontrado",
+                "status" => false,
+                "datetime" => date("Y-m-d H:i:s"),
+            );
+            echo json_encode($data);
+            die();
+        }
+        $idActivo = $_POST["idUserActivo"];
+        $idAdd = $_POST["idUserAdd"];
+        //evaluamos que no envie campos vacios
+        if ($idActivo == "" || $idAdd == "") {
+            $data = array(
+                "title" => "Ocurrio un error inesperado",
+                "description" => "No se permite el ingreso de campos vacios",
+                "status" => false,
+                "datetime" => date("Y-m-d H:i:s"),
+            );
+            echo json_encode($data);
+            die();
+        }
+        //
+    }
 }

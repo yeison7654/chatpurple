@@ -61,11 +61,22 @@ class Mysql extends Conexion
 	//Devuelve todos los registros
 	public function select_all(string $query)
 	{
-		$this->strquery = $query;
-		$result = $this->conexion->prepare($this->strquery);
-		$result->execute();
-		$data = $result->fetchall(PDO::FETCH_ASSOC);
-		return $data;
+		try {
+			$this->strquery = $query;
+			$result = $this->conexion->prepare($this->strquery);
+			$result->execute();
+			$data = $result->fetchall(PDO::FETCH_ASSOC);
+			return $data;
+		} catch (PDOException $error) {
+			$data = array(
+				"title" => "Ocurrio un error inesperado",
+				"description" => $error->getMessage(),
+				"status" => false,
+				"datetime" => date("Y-m-d H:i:s"),
+			);
+			echo json_encode($data);
+			die();
+		}
 	}
 	//Actualiza registros
 	public function update(string $query, array $arrValues)

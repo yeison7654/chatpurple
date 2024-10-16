@@ -9,9 +9,11 @@ class ChatModel extends Mysql
 
     public function selectUserName(string $userName)
     {
-        $sql = "SELECT u.id,u.username,u.email FROM users AS u WHERE u.username=?;";
-        $arrData = array($this->userName = $userName);
-        $request = $this->select($sql, $arrData);
+        $this->userName = $userName;
+        $sql = 'SELECT u.id,u.username,u.email FROM users AS u 
+        WHERE u.username LIKE "%' . $this->userName . '%" OR 
+        u.email LIKE "%' . $this->userName . '%";';
+        $request = $this->select_all($sql);
         return $request;
     }
 }
