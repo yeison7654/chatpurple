@@ -4,6 +4,7 @@ class ChatModel extends Mysql
     private $userName;
     private $idUser;
     private $idConversation;
+    private $content;
     public function __construct()
     {
         parent::__construct();
@@ -35,8 +36,23 @@ class ChatModel extends Mysql
         $this->idConversation = $id;
         $sql = "SELECT m.id,m.conversation_id,m.user_id,m.content,m.sent_at,u.username FROM messages AS m 
                 INNER JOIN users AS u ON u.id=m.user_id
-                WHERE m.conversation_id={$this->idConversation}";
+                WHERE m.conversation_id={$this->idConversation} ORDER BY m.sent_at ASC";
         $request = $this->select_all($sql);
+        return $request;
+    }
+    //modelo que inserta el mensaje
+    public function insertMessage(int $idConversation, int $idUser, string $content)
+    {
+        $this->idConversation = $idConversation;
+        $this->idUser = $idUser;
+        $this->content = $content;
+        $arrData = array(
+            $this->idConversation,
+            $this->idUser,
+            $this->content
+        );
+        $sql = "INSERT INTO messages (conversation_id,user_id,content) VALUES(?,?,?);";
+        $request = $this->insert($sql, $arrData);
         return $request;
     }
 }

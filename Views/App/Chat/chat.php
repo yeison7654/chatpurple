@@ -45,12 +45,13 @@
             </div>
         </nav>
         <div class="chat-body-message" id="messageList">
-          
-          
+
+
         </div>
         <footer class="chat-foot-message">
-            <form action="">
-                <textarea name="" id="" class="input-message"></textarea>
+            <form id="formMessage" class="form-message">
+                <input type="hidden" name="idConversation" id="idConversation">
+                <textarea name="txtMessage" id="txtMessage" class="input-message"></textarea>
                 <button type="submit" class="btn-send">
                     <i class="fa-solid fa-paper-plane"></i>
                 </button>

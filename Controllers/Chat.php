@@ -148,4 +148,42 @@ class Chat extends Controllers
         }
         echo json_encode(["status" => true, "data" => $request]);
     }
+    //funcion que registra el mensaje
+    public function sendMessage()
+    {
+        //verificar si existe el metodo solicitado
+        if (!$_POST) {
+            $data = array(
+                "title" => "Ocurrio un error inesperado",
+                "description" => "Metodo del formulario no encontrado",
+                "status" => false,
+                "datetime" => date("Y-m-d H:i:s"),
+            );
+            echo json_encode($data);
+            die();
+        }
+        $idUser = strClean($_POST["idUser"]);
+        $idConversation = strClean($_POST["idConversation"]);
+        $message = strClean($_POST["txtMessage"]);
+        //evaluamos que no envie campos vacios
+        if ($idUser == "" || $idConversation == "" || $message == "") {
+            $data = array(
+                "title" => "Ocurrio un error inesperado",
+                "description" => "No se permite el ingreso de campos vacios",
+                "status" => false,
+                "datetime" => date("Y-m-d H:i:s"),
+            );
+            echo json_encode($data);
+            die();
+        }
+        //registramos el mensaje
+        $request = $this->model->insertMessage($idConversation, $idUser,  $message);
+        if ($request) {
+            echo json_encode(["status" => true]);
+            die();
+        } else {
+            echo json_encode(["status" => false]);
+            die();
+        }
+    }
 }
