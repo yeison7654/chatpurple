@@ -44,73 +44,9 @@
                 </div>
             </div>
         </nav>
-        <div class="chat-body-message">
-            <div class="message-user">
-                <div class="message-head">
-                    <p>Usuario en linea</p>
-                </div>
-                <div class="message-body">
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                </div>
-                <div class="message-foot">
-                    <span>10:53 am</span>
-                </div>
-            </div>
-            <div class="message-me">
-                <div class="message-head">
-                    <p>Usuario en linea</p>
-                </div>
-                <div class="message-body">
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                </div>
-                <div class="message-foot">
-                    <span>10:53 am</span>
-                </div>
-            </div>
-            <div class="message-user">
-                <div class="message-head">
-                    <p>Usuario en linea</p>
-                </div>
-                <div class="message-body">
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                </div>
-                <div class="message-foot">
-                    <span>10:53 am</span>
-                </div>
-            </div>
-            <div class="message-user">
-                <div class="message-head">
-                    <p>Usuario en linea</p>
-                </div>
-                <div class="message-body">
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                </div>
-                <div class="message-foot">
-                    <span>10:53 am</span>
-                </div>
-            </div>
-            <div class="message-user">
-                <div class="message-head">
-                    <p>Usuario en linea</p>
-                </div>
-                <div class="message-body">
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                </div>
-                <div class="message-foot">
-                    <span>10:53 am</span>
-                </div>
-            </div>
-            <div class="message-me">
-                <div class="message-head">
-                    <p>Usuario en linea</p>
-                </div>
-                <div class="message-body">
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                </div>
-                <div class="message-foot">
-                    <span>10:53 am</span>
-                </div>
-            </div>
+        <div class="chat-body-message" id="messageList">
+          
+          
         </div>
         <footer class="chat-foot-message">
             <form action="">

@@ -88,9 +88,9 @@ class Chat extends Controllers
             die();
         }
         $idActivo = $_POST["idUserActivo"];
-        $idAdd = $_POST["idUserAdd"];
+        $idConversation = $_POST["idConversation"];
         //evaluamos que no envie campos vacios
-        if ($idActivo == "" || $idAdd == "") {
+        if ($idActivo == "" || $idConversation == "") {
             $data = array(
                 "title" => "Ocurrio un error inesperado",
                 "description" => "No se permite el ingreso de campos vacios",
@@ -100,6 +100,52 @@ class Chat extends Controllers
             echo json_encode($data);
             die();
         }
-        //
+        //C1: Obtener la conversacion que tenga el usuario activo
+        $request = $this->model->selectChatConversation($idConversation);
+        if (count($request) <= 0) {
+            echo json_encode(["status" => false, "text" => "No hay conversacion"]);
+            die();
+        }
+        echo json_encode(["status" => true, "data" => $request]);
+    }
+    //funcion que verifica si tenes convesacione en nuesstro sistema o cuenta
+    public function listConversation()
+    {
+        //verificar si existe el metodo solicitado
+        if (!$_POST) {
+            $data = array(
+                "title" => "Ocurrio un error inesperado",
+                "description" => "Metodo del formulario no encontrado",
+                "status" => false,
+                "datetime" => date("Y-m-d H:i:s"),
+            );
+            echo json_encode($data);
+            die();
+        }
+        $idUser = strClean($_POST["idUser"]);
+        //evaluamos que no envie campos vacios
+        if ($idUser == "") {
+            $data = array(
+                "title" => "Ocurrio un error inesperado",
+                "description" => "No se permite el ingreso de campos vacios",
+                "status" => false,
+                "datetime" => date("Y-m-d H:i:s"),
+            );
+            echo json_encode($data);
+            die();
+        }
+        //obtenemos las conversacion del modelo
+        $request = $this->model->selectConversationUser($idUser);
+        if (!is_array($request)) {
+            $data = array(
+                "title" => "Ocurrio un error inesperado",
+                "description" => "No se encontraron conversaciones",
+                "status" => false,
+                "datetime" => date("Y-m-d H:i:s"),
+            );
+            echo json_encode($data);
+            die();
+        }
+        echo json_encode(["status" => true, "data" => $request]);
     }
 }

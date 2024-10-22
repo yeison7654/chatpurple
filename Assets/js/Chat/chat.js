@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
         searchUser();
         selectUserChat();
+        listConversaciones()
     }, 1000);
 });
 document.addEventListener("click", () => {
@@ -59,11 +60,11 @@ function selectUserChat() {
     arrUsers.forEach((element) => {
         element.addEventListener("click", () => {
             document.querySelector(".user-message-title").innerHTML = element.getAttribute("data-name");
-            let idUserAdd = element.getAttribute("data-id");
+            let idConversation = element.getAttribute("data-id");
             let idUserActivo = arrInfoUserActive.id;
             let data = new FormData();
+            data.append("idConversation", idConversation);
             data.append("idUserActivo", idUserActivo);
-            data.append("idUserAdd", idUserAdd);
             let encabezados = new Headers();
             let config = {
                 method: "POST",
@@ -77,11 +78,95 @@ function selectUserChat() {
                 fetch(url, config)
                     .then(response => response.json())
                     .then(data => {
+                        let arrChat = data.data;
+                        let messageList = document.querySelector("#messageList");
+                        if (!data.status) {
+                            messageList.innerHTML = `<p class="title-user color-primary text-center">${data.text}</p>`;
+                            return;
+                        }
+                        let chats = "";
+                        arrChat.forEach(element => {
+                            if (element.user_id == idUserActivo) {
+                                chats += `  <div class="message-me">
+                                                <div class="message-head">
+                                                    <p>${arrInfoUserActive.username}</p>
+                                                </div>
+                                                <div class="message-body">
+                                                    <p>${element.content}</p>
+                                                </div>
+                                                <div class="message-foot">
+                                                    <span>${element.sent_at}</span>
+                                                </div>
+                                            </div>`
+                            } else {
+                                chats += `  <div class="message-user">
+                                <div class="message-head">
+                                    <p>${element.username}</p>
+                                </div>
+                                <div class="message-body">
+                                    <p>${element.content}</p>
+                                </div>
+                                <div class="message-foot">
+                                    <span>${element.sent_at}</span>
+                                </div>
+                            </div>`
+                            }
 
+                        });
+                        messageList.innerHTML = chats;
                     })
             } catch (error) {
                 console.error("Error en el fetch " + error);
             }
         });
     });
+}
+function listConversaciones() {
+    let listUsersChat = document.querySelector("#listUsersChat");
+    let idUser = arrInfoUserActive.id;
+    let data = new FormData();
+    data.append("idUser", idUser);
+    let encabezados = new Headers();
+    let config = {
+        method: "POST",
+        headers: encabezados,
+        node: "cors",
+        cache: "no-cache",
+        body: data,
+    }
+    let url = base_url + "/Chat/listConversation";
+    fetch(url, config)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then((data) => {
+            if (data.status) {
+                let arrInfo = data.data
+                let cardUser = "";
+                arrInfo.forEach(element => {
+                    cardUser += `  <div data-id="${element.id}" data-name="${element.name}" class="user-chat">
+                                    <img src="${base_url}/Assets/images/user.png" alt="${element.name}">
+                                    <div class="user-body-list">
+                                        <div class="user-head-list">
+                                            <p class="title-user color-primary">${element.name}</p>
+                                            <p class="date-user">17 Sept 09 am</p>
+                                        </div>
+                                        <p class="user-ultimate-msj email">
+                                        </p>
+                                    </div>
+                               </div>`
+                });
+                document.querySelector("#listUsersChat").innerHTML = cardUser;
+            } else {
+                document.querySelector("#listUsersChat").innerHTML = `<p class="title-user color-primary text-center">Sin conversaciones</p>`;
+            }
+            selectUserChat();
+        })
+        .catch(error => {
+            console.error("Error en el fetch: " + error);
+        });
+
 }
