@@ -1,3 +1,4 @@
+let IdInvertvaloChat = 0;
 document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
         searchUser();
@@ -55,7 +56,7 @@ function searchUser() {
         }
     })
 }
-
+//esta funcion me permite cargar los chat de un usuario o conversacion
 function selectUserChat() {
     let arrUsers = document.querySelectorAll(".user-chat");
     arrUsers.forEach((element) => {
@@ -63,7 +64,13 @@ function selectUserChat() {
             document.querySelector(".user-message-title").innerHTML = element.getAttribute("data-name");
             let idUserA = arrInfoUserActive.id;
             let idConver = element.getAttribute("data-id");
-            listChats(idUserA, idConver);
+            if (IdInvertvaloChat != 0) {
+                clearInterval(IdInvertvaloChat);
+            }
+            IdInvertvaloChat = setInterval(() => {
+                listChats(idUserA, idConver);
+                scrollToBottom();
+            }, 10);
         });
     });
 }
@@ -212,4 +219,9 @@ function listChats(idUserA, idConver) {
     } catch (error) {
         console.error("Error en el fetch " + error);
     }
+}
+//funcion que te permite desplazar el scroll al final del chat
+function scrollToBottom() {
+    let messageList = document.querySelector("#messageList");
+    messageList.scrollTop = messageList.scrollHeight;
 }
