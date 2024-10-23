@@ -33,7 +33,15 @@
             </button>
         </footer>
     </section>
-    <section class="chat-message-list hidden-movil">
+    <section class="chat-dashboard hidden-movil">
+        <div class="box-menu-dashboard">
+            <button><i class="fa-solid fa-plus"></i></button>
+            <button><i class="fa-solid fa-user"></i></button>
+            <button><i class="fa-solid fa-users"></i></button>
+            <button><i class="fa-solid fa-door-open"></i></button>
+        </div>
+    </section>
+    <section class="chat-message-list hidden hidden-movil">
         <nav class="chat-head-message">
             <a href="http://" class="btn-back"><i class="fa-solid fa-arrow-left"></i></a>
             <div class="box-user-message">
@@ -45,8 +53,6 @@
             </div>
         </nav>
         <div class="chat-body-message" id="messageList">
-
-
         </div>
         <footer class="chat-foot-message">
             <form id="formMessage" class="form-message">

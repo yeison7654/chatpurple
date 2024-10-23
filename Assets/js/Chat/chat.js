@@ -64,13 +64,14 @@ function selectUserChat() {
             document.querySelector(".user-message-title").innerHTML = element.getAttribute("data-name");
             let idUserA = arrInfoUserActive.id;
             let idConver = element.getAttribute("data-id");
+            hideChatDashboard();
             if (IdInvertvaloChat != 0) {
                 clearInterval(IdInvertvaloChat);
             }
             IdInvertvaloChat = setInterval(() => {
                 listChats(idUserA, idConver);
                 scrollToBottom();
-            }, 10);
+            }, 500);
         });
     });
 }
@@ -224,4 +225,11 @@ function listChats(idUserA, idConver) {
 function scrollToBottom() {
     let messageList = document.querySelector("#messageList");
     messageList.scrollTop = messageList.scrollHeight;
+}
+//Funcion que oculta el chat dashboard y muestra las lista de chat seleccionado
+function hideChatDashboard() {
+    let chatDashboard = document.querySelector(".chat-dashboard");
+    chatDashboard.classList.add("hidden");
+    let chatList = document.querySelector(".chat-message-list");
+    chatList.classList.remove("hidden");
 }
