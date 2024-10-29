@@ -186,4 +186,21 @@ class Chat extends Controllers
             die();
         }
     }
+    //funcion que lista los usuarios del sistema de red social
+    public function listUsersSelect()
+    {
+        //verificar si existe el metodo solicitado
+        if (!$_GET) {
+            $data = array(
+                "title" => "Ocurrio un error inesperado",
+                "description" => "Metodo del formulario no encontrado",
+                "status" => false,
+                "datetime" => date("Y-m-d H:i:s"),
+            );
+            echo json_encode($data);
+            die();
+        }
+        $request = $this->model->selectUsers();
+        echo json_encode(["status" => true, "data" => $request]);
+    }
 }

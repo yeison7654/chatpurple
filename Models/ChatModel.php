@@ -55,4 +55,11 @@ class ChatModel extends Mysql
         $request = $this->insert($sql, $arrData);
         return $request;
     }
+    //modelo que devuelve los usuarios de la red social
+    public function selectUsers()
+    {
+        $sql = "SELECT id,username,email FROM users;";
+        $request = $this->select_all($sql);
+        return $request;
+    }
 }

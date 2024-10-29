@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
         selectUserChat();
         listConversaciones()
         sendMessage();
+        showModalCreateConversation();
+        listUsersSelect();
     }, 1000);
 });
 document.addEventListener("click", () => {
@@ -232,4 +234,35 @@ function hideChatDashboard() {
     chatDashboard.classList.add("hidden");
     let chatList = document.querySelector(".chat-message-list");
     chatList.classList.remove("hidden");
+}
+//Esta funcion muestra el modal para crear una conversacion
+function showModalCreateConversation() {
+    let newChat = document.querySelector(".new-chat");
+    let openNewChat = document.querySelector("#openNewChat");
+    openNewChat.addEventListener("click", () => {
+        newChat.classList.remove("hidden");
+    });
+}
+//funcion qu lista el select usuarios con todos los usuario de la red social
+function listUsersSelect() {
+    let selectUser = document.querySelector("#slctUsuarios");
+    let url = base_url + "/Chat/listUsersSelect";
+    fetch(url).
+        then(response => {
+            if (!response.ok) {
+                throw new Error("Error en la solicitud: " + response.status +
+                    "-" + response.statusText);
+            }
+            return response.json();
+        })
+        .then(arrData => {
+            let options = `<option value="" selected disabled>Selecciona un usuario</option>`;
+            arrData.data.forEach(element => {
+                options += `<option value="${element.id}">${element.username}</option>`;
+            });
+            selectUser.innerHTML = options;
+        })
+        .catch(error => {
+            console.error("Error en el fetch " + error);
+        });
 }

@@ -1,4 +1,25 @@
 <?= header_chat($data) ?>
+<div class="modal hidden new-chat">
+    <div class="modal-content">
+        <div class="modal-head">
+            <h1 class="modal-head-title">Crear nuevo chat</h1>
+            <button class="modal-head-close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+            <form id="formNewChat">
+                <div class="form-group">
+                    <label for="slctUsuarios">Usuarios</label>
+                    <select name="slctUsuarios" id="slctUsuarios">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button>Crear Chat</button>
+                </div>
+            </form>
+        </div>
+        <div class="modal-foot"></div>
+    </div>
+</div>
 <div class="box-chat">
     <section class="chat-list">
         <nav class="list-head">
@@ -35,7 +56,7 @@
     </section>
     <section class="chat-dashboard hidden-movil">
         <div class="box-menu-dashboard">
-            <button><i class="fa-solid fa-plus"></i></button>
+            <button id="openNewChat"><i class="fa-solid fa-plus"></i></button>
             <button><i class="fa-solid fa-user"></i></button>
             <button><i class="fa-solid fa-users"></i></button>
             <button><i class="fa-solid fa-door-open"></i></button>
