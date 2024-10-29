@@ -292,6 +292,7 @@ function createConversation() {
             }).
             then(data => {
                 listConversaciones();
+                document.querySelector(".new-chat").classList.add("hidden");
             }).catch(error => {
                 console.error("Error en el fetch " + error);
             });
