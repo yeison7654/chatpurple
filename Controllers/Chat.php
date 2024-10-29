@@ -203,4 +203,43 @@ class Chat extends Controllers
         $request = $this->model->selectUsers();
         echo json_encode(["status" => true, "data" => $request]);
     }
+    //funcion que crea la conversacion entre un usuario
+    public function createConversation()
+    {
+        //verificar si existe el metodo solicitado
+        if (!$_POST) {
+            $data = array(
+                "title" => "Ocurrio un error inesperado",
+                "description" => "Metodo del formulario no encontrado",
+                "status" => false,
+                "datetime" => date("Y-m-d H:i:s"),
+            );
+            echo json_encode($data);
+            die();
+        }
+        $idUser = strClean($_POST["slctUsuarios"]);
+        $idUserActivo = $_SESSION["chat"]["infoUSer"]["id"];
+        //evaluamos que no envie campos vacios
+        if ($idUser == "" || $idUserActivo == "") {
+            $data = array(
+                "title" => "Ocurrio un error inesperado",
+                "description" => "No se permite el ingreso de campos vacios",
+                "status" => false,
+                "datetime" => date("Y-m-d H:i:s"),
+            );
+            echo json_encode($data);
+            die();
+        }
+        //registramos el mensaje
+        $request = $this->model->insertConversation("conversacion 1");
+        $idConversation = $request;
+        //registrar el usuario en la conversacion user 1
+        $request1 = $this->model->insertConversationUser($idConversation, $idUserActivo);
+        //registrar el usuario en la conversacion user 2
+        $reques2 = $this->model->insertConversationUser($idConversation, $idUser);
+        if ($request1 && $reques2) {
+            echo json_encode(["status" => true]);
+            die();
+        }
+    }
 }

@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sendMessage();
         showModalCreateConversation();
         listUsersSelect();
+        createConversation();
     }, 1000);
 });
 document.addEventListener("click", () => {
@@ -265,4 +266,35 @@ function listUsersSelect() {
         .catch(error => {
             console.error("Error en el fetch " + error);
         });
+}
+//funcion que crea una conversacion
+function createConversation() {
+    let formNewChat = document.querySelector("#formNewChat");
+    formNewChat.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let data = new FormData(formNewChat);
+        let headers = new Headers();
+        let config = {
+            method: "POST",
+            headers: headers,
+            node: "cors",
+            cache: "no-cache",
+            body: data
+        }
+        let url = base_url + "/Chat/createConversation";
+        fetch(url, config).
+            then(response => {
+                if (!response.ok) {
+                    throw new Error("Error en la solicitud: " + response.status +
+                        "-" + response.statusText);
+                }
+                return response.json();
+            }).
+            then(data => {
+                listConversaciones();
+            }).catch(error => {
+                console.error("Error en el fetch " + error);
+            });
+    }
+    );
 }
